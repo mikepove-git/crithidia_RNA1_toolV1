@@ -6,8 +6,9 @@ Streamlit application to design RNAi primers targeting CDS for Crithidia fascicu
 check for potential off-targets using k-mer analysis, format primers
 with overhangs, optionally design flanking qPCR primers, and visualize results on gene model.
 
-Version 24.1: Cloud-ready with FileNotFoundError fix and added cache-clearing logic
-              to prevent crash loops on deployment.
+Version 24.0: Cloud-ready with file upload capability. Fixed FileNotFoundError bug.
+              Allows users to upload data files via Streamlit interface.
+              Works in browser as if running locally.
 
 Requires: streamlit, primer3-py, pyfaidx, pandas, pickle
 """
@@ -607,14 +608,6 @@ def generate_gene_model_svg(gene_id, transcript_genomic_start, transcript_genomi
 # --- Streamlit App UI ---
 
 st.set_page_config(layout="wide", page_title="Crithidia RNAi Tool")
-
-# --- Startup Cache Clear (Added to fix potential Streamlit Cloud caching issues) ---
-if 'startup_done' not in st.session_state:
-    # Clear both data and resource caches to ensure any corrupt/old indices are rebuilt
-    st.cache_data.clear()
-    st.cache_resource.clear()
-    st.session_state.startup_done = True
-# ---------------------------------------------------------------------------------
 
 # --- Title ---
 st.title("*Crithidia fasciculata* RNAi Tool")
