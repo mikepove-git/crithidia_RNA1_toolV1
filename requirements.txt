@@ -1,0 +1,5 @@
+streamlit
+primer3-py
+pyfaidx
+pandas
+gffutils
